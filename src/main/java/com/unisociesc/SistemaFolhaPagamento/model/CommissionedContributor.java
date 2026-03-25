@@ -21,4 +21,9 @@ public class CommissionedContributor extends Collaborator{
     @Column
     private Double percentageCommission;
 
+    public CommissionedContributor(Long id, Integer registrationNumber, String name, Double totalSales, Double percentageCommission) {
+        super(id, registrationNumber, name);
+        this.totalSales = totalSales;
+        this.percentageCommission = percentageCommission;
+    }
 }

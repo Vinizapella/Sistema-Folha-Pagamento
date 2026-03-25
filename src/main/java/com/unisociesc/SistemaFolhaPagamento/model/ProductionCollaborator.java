@@ -12,8 +12,6 @@ import lombok.Setter;
 @DiscriminatorValue("PRODUCTION")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class ProductionCollaborator extends Collaborator{
 
     @Column
@@ -21,4 +19,14 @@ public class ProductionCollaborator extends Collaborator{
     @Column
     private Integer quantityProduced;
 
+    public ProductionCollaborator(Long id, Integer registrationNumber, String name, Double valuePerPiece, Integer quantityProduced) {
+        super(id, registrationNumber, name);
+        this.valuePerPiece = valuePerPiece;
+        this.quantityProduced = quantityProduced;
+    }
+
+    public ProductionCollaborator(Double valuePerPiece, Integer quantityProduced) {
+        this.valuePerPiece = valuePerPiece;
+        this.quantityProduced = quantityProduced;
+    }
 }

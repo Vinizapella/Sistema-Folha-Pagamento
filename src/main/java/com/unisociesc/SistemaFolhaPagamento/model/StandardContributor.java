@@ -12,6 +12,12 @@ import lombok.Setter;
 @DiscriminatorValue("STANDARD")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class StandardContributor extends Collaborator{ }
+public class StandardContributor extends Collaborator{
+
+    public StandardContributor(Long id, Integer registrationNumber, String name) {
+        super(id, registrationNumber, name);
+    }
+
+    public StandardContributor() {
+    }
+}
