@@ -52,7 +52,12 @@ public class CollaboratorMapper {
 
     }
 
-    public CollaboratorResponseDto toResponse(Collaborator collaborator, Double baseSalary, Double extra, Double finalSalary) {
+    public CollaboratorResponseDto toResponse(
+            Collaborator collaborator,
+            Double baseSalary,
+            Double extra,
+            Double finalSalary
+    ) {
         if (collaborator instanceof StandardContributor) {
             return new StandardResponseDto(
                     collaborator.getName(),

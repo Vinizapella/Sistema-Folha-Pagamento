@@ -20,7 +20,7 @@ public class ProductStrategyCalculator implements SalaryStrategyCalculator{
             Double baseSalary
     ){
         ProductionCollaborator product = (ProductionCollaborator) collaborator;
-        return baseSalary + (product.getValuePerPiece()) * (product.getQuantityProduced()) / 100;
+        return baseSalary + (product.getValuePerPiece()) * (product.getQuantityProduced());
     }
 
 }
