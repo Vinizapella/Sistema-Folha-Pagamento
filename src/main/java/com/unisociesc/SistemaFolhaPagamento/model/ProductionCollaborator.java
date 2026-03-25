@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@DiscriminatorValue("PRODUCAO")
+@DiscriminatorValue("PRODUCTION")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,8 +17,8 @@ import lombok.Setter;
 public class ProductionCollaborator extends Collaborator{
 
     @Column
-    private Double valorPorPeca;
+    private Double valuePerPiece;
     @Column
-    private Integer quantidadeProduzida;
+    private Integer quantityProduced;
 
 }

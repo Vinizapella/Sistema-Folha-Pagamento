@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@DiscriminatorValue("COMISSIONADO")
+@DiscriminatorValue("COMMISSIONED")
 public class CommissionedContributor extends Collaborator{
 
     @Column
