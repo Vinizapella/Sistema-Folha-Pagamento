@@ -10,7 +10,7 @@ public record CommissionedResponseDto(
 
         Double baseSalary,
 
-        Double commission,
+        Double extras,
 
         Double finalSalary
 

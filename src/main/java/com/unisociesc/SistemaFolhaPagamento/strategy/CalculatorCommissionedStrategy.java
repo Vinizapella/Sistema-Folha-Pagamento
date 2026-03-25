@@ -20,7 +20,7 @@ public class CalculatorCommissionedStrategy implements SalaryStrategyCalculator 
             Double baseSalary
     ){
         CommissionedContributor colab = (CommissionedContributor) collaborator;
-        return baseSalary + (colab.getTotalSales()) * (colab.getPercentageCommission());
+        return baseSalary + (colab.getTotalSales()) * (colab.getPercentageCommission()) / 100;
     }
 
 }

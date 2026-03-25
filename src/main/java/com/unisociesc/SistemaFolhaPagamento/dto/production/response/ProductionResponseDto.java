@@ -10,7 +10,7 @@ public record ProductionResponseDto(
 
         Double baseSalary,
 
-        Double productivity,
+        Double extras,
 
         Double finalSalary
 

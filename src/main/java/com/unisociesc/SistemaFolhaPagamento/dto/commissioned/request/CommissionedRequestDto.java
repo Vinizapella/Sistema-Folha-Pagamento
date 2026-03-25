@@ -16,7 +16,7 @@ public record CommissionedRequestDto(
         Double totalSales,
 
         @NotNull(message = "Commission percentage is required")
-        @DecimalMin(value = "0.0", message = "Commission cannot be negative")
+        @DecimalMin(value = "0.1", message = "Commission cannot be negative")
         @DecimalMax(value = "100.0", message = "Commission cannot exceed 100%")
         Double percentageCommission
 

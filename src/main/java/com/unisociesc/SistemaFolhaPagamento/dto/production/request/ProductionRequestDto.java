@@ -19,7 +19,6 @@ public record ProductionRequestDto(
         Double valuePerPiece,
 
         @NotNull(message = "Quantity of pieces is required")
-        @Min(value = 0, message = "Quantity of pieces cannot be negative")
         @Positive(message = "Quantity of pieces must be at least one")
         Integer quantityProduced
 

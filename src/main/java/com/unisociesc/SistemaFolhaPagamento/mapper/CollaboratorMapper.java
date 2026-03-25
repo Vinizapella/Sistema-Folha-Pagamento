@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CollaboratorMapper {
 
-    public static Collaborator toEntity(
+    public Collaborator toEntity(
             CollaboratorRequestDto collaboratorRequestDto
     ){
         if (collaboratorRequestDto instanceof StandardRequestDto standardRequestDto){
@@ -52,7 +52,7 @@ public class CollaboratorMapper {
 
     }
 
-    public static CollaboratorResponseDto toResponse(Collaborator collaborator, Double baseSalary, Double extra, Double finalSalary) {
+    public CollaboratorResponseDto toResponse(Collaborator collaborator, Double baseSalary, Double extra, Double finalSalary) {
         if (collaborator instanceof StandardContributor) {
             return new StandardResponseDto(
                     collaborator.getName(),
