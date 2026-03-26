@@ -1,13 +1,13 @@
 package com.unisociesc.SistemaFolhaPagamento;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.unisociesc.SistemaFolhaPagamento.controller.CollaboratorController;
-import com.unisociesc.SistemaFolhaPagamento.dto.standard.request.StandardRequestDto;
-import com.unisociesc.SistemaFolhaPagamento.dto.standard.response.StandardResponseDto;
-import com.unisociesc.SistemaFolhaPagamento.dto.commissioned.request.CommissionedRequestDto;
-import com.unisociesc.SistemaFolhaPagamento.dto.commissioned.response.CommissionedResponseDto;
-import com.unisociesc.SistemaFolhaPagamento.exception.ResourceNotFoundException;
-import com.unisociesc.SistemaFolhaPagamento.service.CollaboratorService;
+import com.unisociesc.SistemaFolhaPagamento.infra.controller.CollaboratorController;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.standard.request.StandardRequestDto;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.standard.response.StandardResponseDto;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.commissioned.request.CommissionedRequestDto;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.commissioned.response.CommissionedResponseDto;
+import com.unisociesc.SistemaFolhaPagamento.domain.exception.ResourceNotFoundException;
+import com.unisociesc.SistemaFolhaPagamento.domain.contract.CollaboratorUseCase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ class CollaboratorControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private CollaboratorService service;
+    private CollaboratorUseCase service;
 
     @Test
     @DisplayName("POST /api/collaborators - Should return 201 Created with the created collaborator")

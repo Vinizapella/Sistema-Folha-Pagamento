@@ -1,15 +1,17 @@
 package com.unisociesc.SistemaFolhaPagamento;
 
-import com.unisociesc.SistemaFolhaPagamento.dto.commissioned.request.CommissionedRequestDto;
-import com.unisociesc.SistemaFolhaPagamento.dto.commissioned.response.CommissionedResponseDto;
-import com.unisociesc.SistemaFolhaPagamento.dto.production.request.ProductionRequestDto;
-import com.unisociesc.SistemaFolhaPagamento.dto.production.response.ProductionResponseDto;
-import com.unisociesc.SistemaFolhaPagamento.dto.standard.request.StandardRequestDto;
-import com.unisociesc.SistemaFolhaPagamento.dto.standard.response.StandardResponseDto;
-import com.unisociesc.SistemaFolhaPagamento.mapper.CollaboratorMapper;
-import com.unisociesc.SistemaFolhaPagamento.model.CommissionedContributor;
-import com.unisociesc.SistemaFolhaPagamento.model.ProductionCollaborator;
-import com.unisociesc.SistemaFolhaPagamento.model.StandardContributor;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.CollaboratorRequestDto;
+import com.unisociesc.SistemaFolhaPagamento.domain.entity.Collaborator;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.commissioned.request.CommissionedRequestDto;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.commissioned.response.CommissionedResponseDto;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.production.request.ProductionRequestDto;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.production.response.ProductionResponseDto;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.standard.request.StandardRequestDto;
+import com.unisociesc.SistemaFolhaPagamento.application.dto.standard.response.StandardResponseDto;
+import com.unisociesc.SistemaFolhaPagamento.application.mapper.CollaboratorMapper;
+import com.unisociesc.SistemaFolhaPagamento.domain.entity.CommissionedContributor;
+import com.unisociesc.SistemaFolhaPagamento.domain.entity.ProductionCollaborator;
+import com.unisociesc.SistemaFolhaPagamento.domain.entity.StandardContributor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -85,7 +87,7 @@ class CollaboratorMapperTest {
     @Test
     @DisplayName("Should throw IllegalArgumentException when DTO type is UNKNOWN")
     void shouldThrowIllegalArgumentExceptionForUnknownDtoType() {
-        var dtoInvalido = new com.unisociesc.SistemaFolhaPagamento.dto.CollaboratorRequestDto() {
+        var dtoInvalido = new CollaboratorRequestDto() {
             @Override
             public Integer registrationNumber() { return 0; }
             @Override
@@ -171,7 +173,7 @@ class CollaboratorMapperTest {
     @Test
     @DisplayName("Should throw IllegalArgumentException when entity type is UNKNOWN")
     void shouldThrowIllegalArgumentExceptionForUnknownEntity() {
-        var entidadeInvalida = new com.unisociesc.SistemaFolhaPagamento.model.Collaborator(
+        var entidadeInvalida = new Collaborator(
                 1L,
                 999,
                 "unknown"

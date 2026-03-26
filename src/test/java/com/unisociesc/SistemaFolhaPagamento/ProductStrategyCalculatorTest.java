@@ -1,10 +1,10 @@
 package com.unisociesc.SistemaFolhaPagamento;
 
 
-import com.unisociesc.SistemaFolhaPagamento.model.CommissionedContributor;
-import com.unisociesc.SistemaFolhaPagamento.model.ProductionCollaborator;
-import com.unisociesc.SistemaFolhaPagamento.model.StandardContributor;
-import com.unisociesc.SistemaFolhaPagamento.strategy.ProductStrategyCalculator;
+import com.unisociesc.SistemaFolhaPagamento.domain.entity.CommissionedContributor;
+import com.unisociesc.SistemaFolhaPagamento.domain.entity.ProductionCollaborator;
+import com.unisociesc.SistemaFolhaPagamento.domain.entity.StandardContributor;
+import com.unisociesc.SistemaFolhaPagamento.domain.strategy.strategyimpl.ProductionSalaryCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductStrategyCalculatorTest {
 
-    private ProductStrategyCalculator strategy;
+    private ProductionSalaryCalculator strategy;
 
     @BeforeEach
     void setUp() {
-        strategy = new ProductStrategyCalculator();
+        strategy = new ProductionSalaryCalculator();
     }
 
     @Test
