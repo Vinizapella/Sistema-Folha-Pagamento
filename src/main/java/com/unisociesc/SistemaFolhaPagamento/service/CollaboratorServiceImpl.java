@@ -2,6 +2,7 @@ package com.unisociesc.SistemaFolhaPagamento.service;
 
 import com.unisociesc.SistemaFolhaPagamento.dto.CollaboratorRequestDto;
 import com.unisociesc.SistemaFolhaPagamento.dto.CollaboratorResponseDto;
+import com.unisociesc.SistemaFolhaPagamento.exception.ResourceNotFoundException;
 import com.unisociesc.SistemaFolhaPagamento.mapper.CollaboratorMapper;
 import com.unisociesc.SistemaFolhaPagamento.model.Collaborator;
 import com.unisociesc.SistemaFolhaPagamento.repository.CollaboratorRepository;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CollaboratorServiceImpl implements CollaboratorService{
+public class CollaboratorServiceImpl implements CollaboratorService {
 
     private final CollaboratorRepository collaboratorRepository;
     private final CollaboratorMapper collaboratorMapper;
@@ -49,13 +50,15 @@ public class CollaboratorServiceImpl implements CollaboratorService{
     }
 
     @Override
-    public CollaboratorResponseDto update(CollaboratorRequestDto requestDto, Long id) {
+    public CollaboratorResponseDto update(
+            CollaboratorRequestDto requestDto,
+            Long id
+    ) {
         if (!collaboratorRepository.existsById(id)) {
-            throw new IllegalArgumentException("No collaborator found with ID.: " + id);
+            throw new ResourceNotFoundException("No collaborator found with ID: " + id);
         }
 
         Collaborator entityToUpdate = collaboratorMapper.toEntity(requestDto);
-
         entityToUpdate.setId(id);
 
         Collaborator updatedEntity = collaboratorRepository.save(entityToUpdate);
@@ -64,14 +67,18 @@ public class CollaboratorServiceImpl implements CollaboratorService{
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(
+            Long id
+    ) {
         if (!collaboratorRepository.existsById(id)) {
-            throw new IllegalArgumentException("No collaborator found to delete with ID: " + id);
+            throw new ResourceNotFoundException("No collaborator found to delete with ID: " + id);
         }
         collaboratorRepository.deleteById(id);
     }
 
-    private CollaboratorResponseDto calculateAndMap(Collaborator collaborator) {
+    private CollaboratorResponseDto calculateAndMap(
+            Collaborator collaborator
+    ) {
         Double finalSalary = strategies.stream()
                 .filter(strategy -> strategy.support(collaborator))
                 .findFirst()
