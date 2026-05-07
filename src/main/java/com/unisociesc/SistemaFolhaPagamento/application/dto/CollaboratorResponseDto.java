@@ -36,6 +36,13 @@ import com.unisociesc.SistemaFolhaPagamento.application.dto.standard.response.St
 public interface CollaboratorResponseDto {
 
     /**
+     * Returns the unique identifier of the collaborator.
+     *
+     * @return the collaborator's ID
+     */
+    Long id();
+
+    /**
      * Returns the unique registration number of the collaborator.
      *
      * @return the registration number

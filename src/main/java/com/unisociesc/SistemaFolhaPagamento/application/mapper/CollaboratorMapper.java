@@ -104,6 +104,7 @@ public class CollaboratorMapper {
     ) {
         if (collaborator instanceof StandardContributor) {
             return new StandardResponseDto(
+                    collaborator.getId(),
                     collaborator.getName(),
                     collaborator.getRegistrationNumber(),
                     baseSalary,
@@ -112,23 +113,29 @@ public class CollaboratorMapper {
             );
         }
 
-        if (collaborator instanceof CommissionedContributor) {
+        if (collaborator instanceof CommissionedContributor commissionedContributor) {
             return new CommissionedResponseDto(
+                    collaborator.getId(),
                     collaborator.getName(),
                     collaborator.getRegistrationNumber(),
                     baseSalary,
                     extra,
-                    finalSalary
+                    finalSalary,
+                    commissionedContributor.getTotalSales(),
+                    commissionedContributor.getPercentageCommission()
             );
         }
 
-        if (collaborator instanceof ProductionCollaborator) {
+        if (collaborator instanceof ProductionCollaborator productionCollaborator) {
             return new ProductionResponseDto(
+                    collaborator.getId(),
                     collaborator.getName(),
                     collaborator.getRegistrationNumber(),
                     baseSalary,
                     extra,
-                    finalSalary
+                    finalSalary,
+                    productionCollaborator.getValuePerPiece(),
+                    productionCollaborator.getQuantityProduced()
             );
         }
 

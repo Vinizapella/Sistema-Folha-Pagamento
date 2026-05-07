@@ -9,6 +9,7 @@ import com.unisociesc.SistemaFolhaPagamento.application.dto.CollaboratorResponse
  * {@code extras} field is always {@code 0.0} and the {@code finalSalary}
  * is equal to the {@code baseSalary}.</p>
  *
+ * @param id                 the unique identifier of the collaborator
  * @param name               the full name of the collaborator
  * @param registrationNumber the unique registration number of the collaborator
  * @param baseSalary         the base salary configured for the company
@@ -21,6 +22,8 @@ import com.unisociesc.SistemaFolhaPagamento.application.dto.CollaboratorResponse
  * @see CollaboratorResponseDto
  */
 public record StandardResponseDto(
+
+        Long id,
 
         String name,
 

@@ -13,11 +13,14 @@ import com.unisociesc.SistemaFolhaPagamento.application.dto.CollaboratorResponse
  *   finalSalary = baseSalary + extras
  * </pre>
  *
- * @param name               the full name of the collaborator
- * @param registrationNumber the unique registration number of the collaborator
- * @param baseSalary         the base salary configured for the company
- * @param extras             the commission earned beyond the base salary
- * @param finalSalary        the total calculated salary including the commission
+ * @param id                       the unique identifier of the collaborator
+ * @param name                     the full name of the collaborator
+ * @param registrationNumber       the unique registration number of the collaborator
+ * @param baseSalary               the base salary configured for the company
+ * @param extras                   the commission earned beyond the base salary
+ * @param finalSalary              the total calculated salary including the commission
+ * @param totalSales               the total sales amount used to calculate the commission
+ * @param percentageCommission     the commission percentage applied to total sales
  *
  * @author Vinicius dos Santos Zapella
  * @version 1.0
@@ -25,6 +28,8 @@ import com.unisociesc.SistemaFolhaPagamento.application.dto.CollaboratorResponse
  * @see CollaboratorResponseDto
  */
 public record CommissionedResponseDto(
+
+        Long id,
 
         String name,
 
@@ -34,7 +39,11 @@ public record CommissionedResponseDto(
 
         Double extras,
 
-        Double finalSalary
+        Double finalSalary,
+
+        Double totalSales,
+
+        Double percentageCommission
 
 ) implements CollaboratorResponseDto {
 }
