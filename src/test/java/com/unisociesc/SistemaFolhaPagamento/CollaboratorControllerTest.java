@@ -44,6 +44,7 @@ class CollaboratorControllerTest {
                 "João"
         );
         StandardResponseDto response = new StandardResponseDto(
+                1L,
                 "João",
                 1,
                 3000.0,
@@ -57,6 +58,7 @@ class CollaboratorControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.name").value("João"))
                 .andExpect(jsonPath("$.finalSalary").value(3000.0));
     }
@@ -66,6 +68,7 @@ class CollaboratorControllerTest {
     void shouldReturnListAndStatus200OkWhenCollaboratorsExist() throws Exception {
         List<StandardResponseDto> lista = List.of(
                 new StandardResponseDto(
+                        1L,
                         "João",
                         1,
                         3000.0,
@@ -73,6 +76,7 @@ class CollaboratorControllerTest {
                         3000.0
                 ),
                 new StandardResponseDto(
+                        2L,
                         "Victoria",
                         2,
                         3000.0,
@@ -86,7 +90,9 @@ class CollaboratorControllerTest {
         mockMvc.perform(get("/api/collaborators"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].id").value(1L))
                 .andExpect(jsonPath("$[0].name").value("João"))
+                .andExpect(jsonPath("$[1].id").value(2L))
                 .andExpect(jsonPath("$[1].name").value("Victoria"));
     }
 
@@ -110,11 +116,14 @@ class CollaboratorControllerTest {
                 10.0
         );
         CommissionedResponseDto response = new CommissionedResponseDto(
+                1L,
                 "Victoria",
                 2,
                 3000.0,
                 500.0,
-                3500.0
+                3500.0,
+                5000.0,
+                10.0
         );
 
         when(service.update(any(), eq(1L))).thenReturn(response);
@@ -123,6 +132,7 @@ class CollaboratorControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.name").value("Victoria"))
                 .andExpect(jsonPath("$.finalSalary").value(3500.0));
     }

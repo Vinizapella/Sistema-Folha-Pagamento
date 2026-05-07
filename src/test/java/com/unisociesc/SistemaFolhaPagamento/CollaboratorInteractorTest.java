@@ -78,10 +78,12 @@ class CollaboratorInteractorTest {
                 "João"
         );
         StandardResponseDto expectedResponse = new StandardResponseDto(
+                1L,
                 "João",
                 1,
                 BASE_SALARY,
-                0.0, BASE_SALARY
+                0.0,
+                BASE_SALARY
         );
 
         when(collaboratorMapper.toEntity(requestDto)).thenReturn(entity);
@@ -93,6 +95,7 @@ class CollaboratorInteractorTest {
         var result = service.register(requestDto);
 
         assertNotNull(result);
+        assertEquals(1L, result.id());
         assertEquals("João", result.name());
         assertEquals(BASE_SALARY, result.finalSalary());
         verify(collaboratorRepository).save(entity);
@@ -116,10 +119,12 @@ class CollaboratorInteractorTest {
                 "João"
         );
         StandardResponseDto expectedResponse = new StandardResponseDto(
+                1L,
                 "João",
                 1,
                 BASE_SALARY,
-                0.0, BASE_SALARY
+                0.0,
+                BASE_SALARY
         );
 
         when(collaboratorMapper.toEntity(requestDto)).thenReturn(entity);
@@ -149,17 +154,22 @@ class CollaboratorInteractorTest {
                 10.0
         );
         StandardResponseDto r1 = new StandardResponseDto(
+                1L,
                 "João",
                 1,
                 BASE_SALARY,
-                0.0, BASE_SALARY
+                0.0,
+                BASE_SALARY
         );
         CommissionedResponseDto r2 = new CommissionedResponseDto(
+                2L,
                 "Victoria",
                 2,
                 BASE_SALARY,
                 500.0,
-                3500.0
+                3500.0,
+                5000.0,
+                10.0
         );
 
         when(collaboratorRepository.findAll()).thenReturn(List.of(c1, c2));
@@ -212,11 +222,14 @@ class CollaboratorInteractorTest {
                 10.0
         );
         CommissionedResponseDto expectedResponse = new CommissionedResponseDto(
+                id,
                 "Victoria",
                 2,
                 BASE_SALARY,
                 800.0,
-                3800.0
+                3800.0,
+                8000.0,
+                10.0
         );
 
         when(collaboratorRepository.existsById(id)).thenReturn(true);
@@ -229,6 +242,7 @@ class CollaboratorInteractorTest {
         var result = service.update(requestDto, id);
 
         assertNotNull(result);
+        assertEquals(id, result.id());
         assertEquals("Victoria", result.name());
         verify(collaboratorRepository).save(entity);
     }

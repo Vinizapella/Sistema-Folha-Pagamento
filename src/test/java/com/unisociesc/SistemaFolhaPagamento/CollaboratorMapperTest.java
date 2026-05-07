@@ -115,6 +115,7 @@ class CollaboratorMapperTest {
 
         assertInstanceOf(StandardResponseDto.class, response);
         StandardResponseDto standardResponse = (StandardResponseDto) response;
+        assertEquals(1L, standardResponse.id());
         assertEquals("João", standardResponse.name());
         assertEquals(1, standardResponse.registrationNumber());
         assertEquals(3000.0, standardResponse.baseSalary());
@@ -142,8 +143,14 @@ class CollaboratorMapperTest {
 
         assertInstanceOf(CommissionedResponseDto.class, response);
         CommissionedResponseDto commissionedResponse = (CommissionedResponseDto) response;
+        assertEquals(1L, commissionedResponse.id());
+        assertEquals("Victoria", commissionedResponse.name());
+        assertEquals(2, commissionedResponse.registrationNumber());
+        assertEquals(3000.0, commissionedResponse.baseSalary());
         assertEquals(500.0, commissionedResponse.extras());
         assertEquals(3500.0, commissionedResponse.finalSalary());
+        assertEquals(5000.0, commissionedResponse.totalSales());
+        assertEquals(10.0, commissionedResponse.percentageCommission());
     }
 
     @Test
@@ -166,8 +173,14 @@ class CollaboratorMapperTest {
 
         assertInstanceOf(ProductionResponseDto.class, response);
         ProductionResponseDto productionResponse = (ProductionResponseDto) response;
+        assertEquals(1L, productionResponse.id());
+        assertEquals("Carlos", productionResponse.name());
+        assertEquals(3, productionResponse.registrationNumber());
+        assertEquals(3000.0, productionResponse.baseSalary());
         assertEquals(1500.0, productionResponse.extras());
         assertEquals(4500.0, productionResponse.finalSalary());
+        assertEquals(15.0, productionResponse.valuePerPiece());
+        assertEquals(100, productionResponse.quantityProduced());
     }
 
     @Test
