@@ -53,13 +53,14 @@ src/main/java/com/unisociesc/SistemaFolhaPagamento/
 - **Polimorfismo com Jackson** — o campo `bond_type` no JSON determina automaticamente o subtipo de colaborador na desserialização
 - **Single Table Inheritance** — todos os colaboradores são persistidos em uma única tabela (`collaborator_table`), diferenciados pela coluna `bond_type`
 - **Global Exception Handler** — tratamento centralizado de erros com respostas padronizadas
+- **Immutable Records** — DTOs implementados como Java records para imutabilidade e segurança
 
 ---
 
 ## 🚀 Tecnologias
 
 - Java 17+
-- Spring Boot
+- Spring Boot 3.x
 - Spring Data JPA
 - Spring Validation (Bean Validation)
 - Hibernate
@@ -113,18 +114,20 @@ Base URL: `/api/collaborators`
 }
 ```
 
-### Exemplo de Response
+### Exemplo de Response (POST/GET/PUT)
 ```json
 {
+  "id": 2,
   "bond_type": "COMMISSIONED",
-  "name": "Victoria Zanchin",
+  "name": "Victoria Lima",
   "registrationNumber": 2,
   "baseSalary": 2000.0,
   "extras": 500.0,
-  "finalSalary": 3500.0
+  "finalSalary": 2500.0,
+  "totalSales": 5000.0,
+  "percentageCommission": 10.0
 }
 ```
-
 ---
 
 ## ⚠️ Respostas de Erro
@@ -142,14 +145,16 @@ Base URL: `/api/collaborators`
 
 O projeto possui testes unitários cobrindo todas as camadas principais:
 
-| Classe de Teste | O que testa |
-|---|---|
-| `CollaboratorControllerTest` | Endpoints REST via MockMvc (201, 200, 204, 404) |
-| `CollaboratorInteractorTest` | Casos de uso com mocks do repository, mapper e strategies |
-| `CollaboratorMapperTest` | Conversão DTO → Entity e Entity → ResponseDTO para os 3 tipos |
-| `CommissionedSalaryCalculatorStrategyTest` | Cálculo de comissão: casos normais, vendas zero, comissão zero, 100% |
-| `ProductStrategyCalculatorTest` | Cálculo por produção: casos normais, quantidade zero, valor zero |
-| `StandardStrategyCalculatorTest` | Sempre retorna salário base, suporte por tipo |
+| Classe de Teste | O que testa | Quantidade |
+|---|---|---|
+| `CollaboratorControllerTest` | Endpoints REST via MockMvc (201, 200, 204, 404) | 8 testes |
+| `CollaboratorInteractorTest` | Casos de uso com mocks do repository, mapper e strategies | 9 testes |
+| `CollaboratorMapperTest` | Conversão DTO → Entity e Entity → ResponseDTO para os 3 tipos | 9 testes |
+| `CommissionedSalaryCalculatorStrategyTest` | Cálculo de comissão: casos normais, vendas zero, comissão zero, 100% | 4 testes |
+| `ProductStrategyCalculatorTest` | Cálculo por produção: casos normais, quantidade zero, valor zero | 4 testes |
+| `StandardStrategyCalculatorTest` | Sempre retorna salário base, suporte por tipo | 2 testes |
+
+**Total: 36+ testes**
 
 Para rodar os testes:
 
@@ -177,12 +182,14 @@ http://localhost:8080/swagger-ui.html
 # Clone o repositório
 git clone https://github.com/Vinizapella/Sistema-Folha-Pagamento.git
 
-# Acesse a pasta do projeto
-cd Sistema-Folha-Pagamento
+# Acesse a pasta do projeto (backend)
+cd Sistema-Folha-Pagamento-BackEnd
 
 # Execute a aplicação
 ./mvnw spring-boot:run
 ```
+
+A API estará disponível em: `http://localhost:8080`
 
 ---
 
@@ -193,6 +200,35 @@ No arquivo `src/main/resources/application.properties`, configure o salário bas
 ```properties
 empresa.config.salario-base=2000.0
 ```
+
+---
+
+## 🔄 Integração com Frontend
+
+O backend está totalmente integrado com o frontend React. Certifique-se de:
+
+1. **CORS habilitado** — O backend aceita requisições do frontend
+2. **URL base do backend** — Frontend está configurado para `http://localhost:8080`
+3. **ID retornado** — Todas as respostas agora incluem o campo `id` necessário para operações de atualização e exclusão
+
+Exemplo de integração no frontend:
+
+```javascript
+// Frontend recebe:
+const collaborator = {
+  id: 1,                         
+  name: "João Silva",
+  registrationNumber: 1,
+  baseSalary: 2000.0,
+  extras: 0.0,
+  finalSalary: 2000.0,
+  bond_type: "STANDARD"
+};
+
+// Delete com o ID:
+DELETE /api/collaborators/1  → 204 No Content ✅
+```
+
 
 ---
 
